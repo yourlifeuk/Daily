@@ -1,5 +1,5 @@
 # Planning and Network Design
-<  >
+**< specification of client, requirment and the network, Port-count, throughput, bandwidth, security, segmentation, resilience, routing comlexities,   >**
 
 During the planning and design phases we consider the specific challenges and requirements of both the network and the client – including port-count, throughput, bandwidth, security, segmentation, resilience, routing complexities, and application specific requirements.
 
@@ -27,7 +27,7 @@ We pride ourselves on completing the project as a whole – so our clients do no
 
 
 # Commissioning, Testing and Handover
- < Basicly the testing and handover, they willl do it together will client, client may has questions. Also it will be not so techincal, Client doesn't need to be professional to go through those details.>,
+ < Basicly the testing and handover, they willl do it together will client, client may has questions. Also it will be not so techincal, Client doesn't need to be professional to go through those details. >,
 
 Following successful installation and connectivity of network hardware our technical engineers begin the Commissioning and Testing phases which are often completed hand-in-hand with the client.
 
