@@ -36,3 +36,26 @@ We actively encourage client involvement at this stage as it helps to introduce 
 In some instances, testing is a fairly simple exercise, and in others it can be a very complex and time-consuming process, but either way testing is a critical component of the overall solution. It’s an element that is often rushed or overlooked and this can lead to issues post-completion.
 
 As we complete testing with our clients (as much as possible) this also doubles-up as a demonstration and handover activity. Whilst comprehensive documentation is provided following the successful deployment, there’s nothing quite like having the experts show you over your shiny new network (over a cup of coffee or two)!
+
+
+# Before you learning
+ * need to ask yourself, what is the result you will going to have
+ * What are you looking for 
+ * what do you want to achieve
+ * how can it apply to me and how can it help me
+
+# while you learning
+ * Assosication & hangers , using story/ pictures stick into your brain
+ * visualizing the image in your mind, alway repeat to yourself
+ * 
+
+# Research
+ * looking for solution, not a defintion 
+
+ week 1 go through 
+ week 2 go through another vendor
+ week 3 need to do research/ book
+ week 4 Only doing Labs
+ week 5 critical thinking,  go thorugh note and questions
+ week 6 question and question the lab
+ week 7
