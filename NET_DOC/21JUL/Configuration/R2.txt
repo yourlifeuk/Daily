@@ -1,0 +1,75 @@
+conf t
+hostname R2
+username tech secret 5 $1$mERr$V3AzF/pAhvRvjIsUimrC8
+!
+ip domain-name ccnp
+crypto key generate rsa 
+1024
+no ip domain-lookup
+ip ssh version 2
+!
+line vty 0 15
+ logging synchronous
+ login local
+ transport input ssh
+ exit
+!
+# DHCP
+ip dhcp excluded-address 172.16.0.1
+!
+ip dhcp pool 172
+ network 172.16.0.0 255.255.255.0
+ default-router 172.16.0.254
+ip dhcp pool 10
+ network 172.16.10.0 255.255.254.0
+ default-router 172.16.10.253
+ip dhcp pool 20
+ network 172.16.20.0 255.255.254.0
+ default-router 172.16.20.253
+ exit
+
+# interface
+interface GigabitEthernet0/0/0
+ ip address 172.16.0.254 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0/0.10
+ encapsulation dot1Q 10
+ ip address 172.16.10.254 255.255.254.0
+!
+interface GigabitEthernet0/0/0.20
+ encapsulation dot1Q 20
+ ip address 172.16.20.254 255.255.254.0
+!
+interface GigabitEthernet0/0/1
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+ standby 0 ip 172.16.0.254
+!
+interface GigabitEthernet0/0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Serial0/1/1
+ ip address 10.2.0.2 255.255.0.0
+
+# IP routing
+router ospf 1
+ router-id 3.3.3.3
+ log-adjacency-changes
+ redistribute bgp 3 subnets 
+ network 172.16.0.0 0.0.255.255 area 0
+!
+router bgp 3
+ bgp router-id 3.3.3.3
+ bgp log-neighbor-changes
+ no synchronization
+ neighbor 10.2.0.1 remote-as 2
+ network 10.2.0.0 mask 255.255.0.0
+ network 172.16.0.0
+ redistribute ospf 1 
