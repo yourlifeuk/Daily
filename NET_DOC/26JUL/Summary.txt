@@ -1,0 +1,15 @@
+VTP
+Server -> SWL3-COL-1
+
+DTP
+
+Inner VLAN
+
+Etherchannel
+
+STP
+BPDU guard - from FA0/15-24 all switch
+
+
+in ran fa0/1-24
+no spanning-tree bpduguard enable

@@ -1,4 +1,4 @@
-conf t
+import conf t
 hostname R1
 username tech secret 5 $1$mERr$V3AzF/pAhvRvjIsUimrC8
 !
