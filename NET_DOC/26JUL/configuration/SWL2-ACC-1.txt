@@ -54,11 +54,3 @@ switchport mode tru
 channel-group 2 mode auto
 
 
-#SPANNING TREE
-spanning-tree portfast default 
-In range fa0/15-24
-switchport trunk en dot
-switchport trunk allowed vlan all
-switchport trunk native vlan 77
-switchport mode trunk
-spanning-tree bpduguard enable
