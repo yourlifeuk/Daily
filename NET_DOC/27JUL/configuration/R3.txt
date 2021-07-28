@@ -1,18 +1,14 @@
 conf t
-hostname SWL2-ACC-3
-secret cisco
-username tech pri 15 secret cisco
+hostname R3
+username admin password cisco
 
-ip domain-name ccnp
-crypto key generate rsa 
-1024
-no ip domain-lookup
-ip ssh version 2
+enable passwor cisco
 
-line vty 0 15
+
+line vty 0 4
  logging synchronous
  login local
- transport input ssh
+ transport input Telnet
  end
 
 #VTP
