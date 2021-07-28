@@ -8,7 +8,8 @@ enable passwor cisco
 
 
 
-
+in range fa0/1-14
+switchport mode access
 
 
 
@@ -28,10 +29,10 @@ line vty 0 4
  exit
 !
 # DHCP
-ip dhcp excluded-address 192.168.1.62
-ip dhcp excluded-address 192.168.1.189
-ip dhcp excluded-address 192.168.1.253
-ip dhcp excluded-address 192.168.1.126
+ip dhcp excluded-address 192.168.1.62 192.168.1.63
+ip dhcp excluded-address 192.168.1.189 192.168.1.190
+ip dhcp excluded-address 192.168.1.253 192.168.1.254
+ip dhcp excluded-address 192.168.1.126 192.168.1.127
 
 !
 ip dhcp pool 192

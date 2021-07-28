@@ -6,7 +6,8 @@ enable passwor cisco
 
 
 
-
+enable password ccnp
+do wr
 
 
 
