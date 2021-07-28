@@ -44,7 +44,13 @@ switch acc vlan 30
 in ran fa0/23-24
 channel-group 3 mode des	
 
-
+# Native vlan 77
+in range fa0/15-24
+switchport trunk encap dot
+switchport trunk native vlan 77
+switchport mode trunk
+end
+show inter  trunk
 
 wr
 

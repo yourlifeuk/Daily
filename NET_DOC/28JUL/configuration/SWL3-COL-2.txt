@@ -115,6 +115,22 @@ switchport trunk end ot
 switchport mode tru
 channel-group 2 mode auto
 
+# Native vlan 77 to Trunk
+in range fa0/15-24
+switchport trunk encap dot
+switchport trunk native vlan 77
+switchport mode trunk
+end
+show inter  trunk
+
+
+in range gi0/1-2
+switchport trunk encap dot
+switchport trunk native vlan 77
+switchport mode trunk
+end
+show inter  trunk
+
 
 
 wr

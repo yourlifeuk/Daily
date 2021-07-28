@@ -1,0 +1,58 @@
+conf t
+hostname SW3
+username tech secret 5 $1$mERr$V3AzF/pAhvRvjIsUimrC8
+!
+ip domain-name ccnp
+crypto key generate rsa 
+1024
+no ip domain-lookup
+ip ssh version 2
+!
+line vty 0 15
+ logging synchronous
+ login local
+ transport input ssh
+ exit
+!
+!
+interface Vlan1
+ ip address 172.16.0.100 255.255.255.0
+!
+!
+
+!
+# Port security
+interface FastEthernet0/1
+ switchport access vlan 10
+ switchport mode access
+ switchport port-security
+ switchport port-security maximum 52
+ switchport port-security mac-address sticky 
+ switchport port-security violation restrict 
+!
+interface FastEthernet0/2
+ switchport access vlan 20
+ switchport mode access
+ switchport port-security
+ switchport port-security mac-address sticky 
+!
+interface FastEthernet0/3
+ switchport mode trunk
+!
+
+# VLAN
+interface Vlan1
+ ip address 172.16.0.50 255.255.255.0
+!
+interface Vlan10
+ mac-address 0030.f2cd.9b01
+ ip address 172.16.10.253 255.255.254.0
+!
+interface Vlan20
+ mac-address 0030.f2cd.9b02
+ ip address 172.16.20.253 255.255.254.0
+!
+router ospf 1
+ router-id 4.4.4.4
+ log-adjacency-changes
+ network 172.16.0.0 0.0.255.255 area 0

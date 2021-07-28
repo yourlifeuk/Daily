@@ -84,6 +84,16 @@ switchport port-security mac-address sticky
 switchport port-security maximum 1
 switchport port-security violation restrict 
 
+# native vlan 77
+in range fa0/15-24
+switchport trunk encap dot
+switchport trunk native vlan 77
+switchport mode trunk
+end
+show inter  trunk
 
+# moveing access port to Native
+in range fa0/15-24
+switchport access vlan 77
 
 wr
