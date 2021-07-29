@@ -1,0 +1,8 @@
+class-map inspect
+match default-inspection-traffic
+
+policy-map global-policy
+ class inspect
+  inspect icmp
+
+service-policy global-policy global

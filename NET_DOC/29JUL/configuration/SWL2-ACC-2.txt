@@ -1,0 +1,39 @@
+conf t
+hostname SWL2-ACC-2
+secret cisco
+username tech pri 15 secret cisco
+
+ip domain-name ccnp
+crypto key generate rsa 
+1024
+no ip domain-lookup
+ip ssh version 2
+
+line vty 0 15
+ logging synchronous
+ login local
+ transport input ssh
+ exit
+
+#VTP
+vtp mode client
+vtp domain ccnp
+vtp pass ccnp
+vtp ver 2
+
+# access vlan
+in ran fa0/1-12
+switch mode acc
+switch acc vlan 10
+
+in ran fa0/13-14
+switch mode acc
+switch acc vlan 30
+
+
+#ethernet channel
+in ran fa0/20-22
+switchport trunk end ot
+switchport mode tru
+channel-group 2 mode des
+

@@ -1,0 +1,99 @@
+conf t
+hostname SWL3-COL-1
+secret cisco
+username tech pri 15 secret cisco
+
+ip domain-name ccnp
+crypto key generate rsa 
+1024
+no ip domain-lookup
+ip ssh version 2
+
+line vty 0 15
+ logging synchronous
+ login local
+ transport input ssh
+ end
+
+
+
+#VTP
+vtp mode server
+vtp domain ccnp
+vtp pass ccnp
+vtp ver 2
+
+VLAN
+vlan 10
+name Production
+vlan 20
+name Sales
+vlan 30
+name Executive
+vlan 40
+name HR
+vlan 50
+name accounting
+vlan 60
+name IT
+vlan 77
+name testing
+vlan 200
+name Servers
+
+# access vlan
+in ran fa0/1-4
+switch mdoe acc
+switch acc vlan 30
+
+in ran fa0/5-6
+switch mdoe acc
+switch acc vlan 40
+
+in ran fa0/7-12
+switch mdoe acc
+switch acc vlan 50
+
+in ran fa0/13-14
+switch mdoe acc
+switch acc vlan 200
+end
+show vlan br
+
+#ethernet channel
+in ran gi0/1-2
+channel-group 1 mode auto
+
+in ran fa0/22-24
+switchport trunk end ot
+switchport mode tru
+channel-group 2 mode auto
+
+
+#Management
+Logging on
+Logging 192.168.200.100
+ntp server 192.168.200.100
+service timestamps log datetime msec 
+
+#Port Security
+in range fa0/1-14
+switchport mode acc
+switchport port-security 
+switchport port-security mac-address sticky 
+switchport port-security maximum 1
+switchport port-security violation restrict 
+
+# native vlan 77
+in range fa0/15-24
+switchport trunk encap dot
+switchport trunk native vlan 77
+switchport mode trunk
+end
+show inter  trunk
+
+# moveing access port to Native
+in range fa0/15-24
+switchport access vlan 77
+
+wr

@@ -1,0 +1,136 @@
+conf t
+hostname SWL3-COL-2
+secret cisco
+username tech pri 15 secret cisco
+
+ip domain-name ccnp
+crypto key generate rsa 
+1024
+no ip domain-lookup
+ip ssh version 2
+
+line vty 0 15
+ logging synchronous
+ login local
+ transport input ssh
+ end
+
+#VTP
+vtp mode client
+vtp domain ccnp
+vtp pass ccnp
+vtp ver 2
+
+# access vlan
+in ran fa0/1-2
+switch mode acc
+switch acc vlan 30
+
+in ran fa0/3-8
+switch mode acc
+switch acc vlan 10
+
+in ran fa0/9-12
+switch mode acc
+switch acc vlan 20
+
+in ran fa0/13-14
+switch mode acc
+switch acc vlan 200
+
+
+
+ip dhcp exclud 192.168.10.254
+ip dhcp exclud 192.168.20.254
+ip dhcp exclud 192.168.30.254
+ip dhcp exclud 192.168.40.254
+ip dhcp exclud 192.168.50.254
+ip dhcp exclud 192.168.60.254
+
+ip dhcp pool 10
+network 192.168.10.0 255.255.255.0
+default-router 192.168.10.254
+
+exit
+ip dhcp pool 20
+network 192.168.20.0 255.255.255.0
+default-router 192.168.20.254
+dns-ser 192.168.200.50
+exit
+ip dhcp pool 30
+network 192.168.30.0 255.255.255.0
+default-router 192.168.30.254
+dns-ser 192.168.200.50
+
+exit
+ip dhcp pool 40
+network 192.168.40.0 255.255.255.0
+default-router 192.168.40.254
+dns-ser 192.168.200.50
+
+exit
+ip dhcp pool 50
+network 192.168.50.0 255.255.255.0
+default-router 192.168.50.254
+dns-ser 192.168.200.50
+exit
+ip dhcp pool 60
+network 192.168.60.0 255.255.255.0
+default-router 192.168.60.254
+dns-ser 192.168.200.50
+
+exit
+
+#INNER vlan
+in vlan 10
+ip add	192.168.10.254 255.255.255.0
+in vlan 20
+ip add	192.168.20.254 255.255.255.0
+
+in vlan 30
+ip add	192.168.30.254 255.255.255.0
+
+in vlan 40
+ip add	192.168.40.254 255.255.255.0
+in vlan 50
+ip add	192.168.50.254 255.255.255.0
+
+in vlan 60
+ip add	192.168.60.254 255.255.255.0
+
+in vlan 200
+ip add	192.168.200.254 255.255.255.0
+
+
+
+#ethernet channel
+in ran gi0/1-2
+channel-group 1 mode des
+
+in ran fa0/23-24
+channel-group 3 mode auto
+
+in ran fa0/20-22
+switchport trunk end ot
+switchport mode tru
+channel-group 2 mode auto
+
+# Native vlan 77 to Trunk
+in range fa0/15-24
+switchport trunk encap dot
+switchport trunk native vlan 77
+switchport mode trunk
+end
+show inter  trunk
+
+
+in range gi0/1-2
+switchport trunk encap dot
+switchport trunk native vlan 77
+switchport mode trunk
+end
+show inter  trunk
+
+
+
+wr
